@@ -14,13 +14,13 @@ Das Ziel: den Todesgott Camazotz vernichten, indem er die Quelle seiner Macht fi
 - Kamerabewegung - Pfeiltasten
 - Springen - Leertaste
 - Interagieren/Aufsammeln - Strg
-- HFR (Angriff) - 
-- Verband verwenden (Heilung) -
+- HFR (Angriff) - Fire2
+- Verband verwenden (Heilung) - 
 
 ### Controller
 - Laufen - linker Joystick
 - Kamerabewegung - rechter Joystick
 - Springen - Y
-- Interagieren/Aufsammeln - 
-- HFR (Angriff) - 
+- Interagieren/Aufsammeln - A
+- HFR (Angriff) - B
 - Verband verwenden (Heilung) -
