@@ -21,6 +21,7 @@ public class Frequency : MonoBehaviour {
             {
                 GetComponent<Collider>().enabled = true;
                 cooldStart = Time.time;
+                print("Passt!");
             }
         }
         else

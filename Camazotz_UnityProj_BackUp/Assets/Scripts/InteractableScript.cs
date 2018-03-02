@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SwitchScript : MonoBehaviour
+public class InteractableScript : MonoBehaviour
 {
     public UnityEvent Interact;
     bool active;
@@ -11,13 +11,17 @@ public class SwitchScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
         if (Input.GetButtonDown("Fire1") && active)
+        {
             Interact.Invoke();
+        }
 	}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             active = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)

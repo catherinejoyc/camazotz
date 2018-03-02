@@ -20,8 +20,6 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask ground;
     bool isGrounded;
 
-    public GameObject attackHitBox;
-
 	// Update is called once per frame
 	void Update () {
         //Ausrichtung
@@ -54,27 +52,15 @@ public class PlayerScript : MonoBehaviour {
         else
         {
             isGrounded = false;
-            speed = 6f;
+            speed = 8f;
         }
         //Gravity
         rb.AddForce(new Vector3(0, -gravity, 0));
-        //Interagieren + Aufsammeln
-        
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(new Vector3(rb.transform.position.x, rb.transform.position.y + groundCheckYOffset, rb.transform.position.z), groundCheckradius);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Interactables
-        //if(other.GetComponent<IInteractable>)
-        if (other.CompareTag("interactable"))
-        {
-
-        }
     }
 }

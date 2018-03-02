@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour {
 
-    Vector3 startPos;
+    public Vector3 openPos;
+    Vector3 closedPos;
+    Vector3 target;
     public bool open;
-    float speed;
+    public float speed;
 
     private void Start()
     {
-        startPos = this.transform.position;
+        closedPos = new Vector3(openPos.x, openPos.y - 3f, openPos.z);
+        target = this.transform.position;
     }
 
     public void ToggleDoor()
     {
         if (open)
-            speed = 5f;
+            target = closedPos;
         else
-            speed = -5f;
+            target = openPos;
 
         open = !open;
     }
 
     private void Update()
     {
-        this.transform.position = Vector3.MoveTowards(startPos, new Vector3(startPos.x, startPos.y - 3.5f, startPos.z), speed * Time.deltaTime);
+        this.gameObject.transform.position = Vector3.MoveTowards(this.transform.position, target, speed * Time.deltaTime);
     }
 }

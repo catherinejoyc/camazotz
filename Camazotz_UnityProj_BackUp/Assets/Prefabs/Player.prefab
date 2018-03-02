@@ -1501,7 +1501,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1982036456030340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4777951238355078}
@@ -2406,12 +2406,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 54479268859986212}
   speed: 17.5
-  jumpSpeed: 7.5
+  jumpSpeed: 9
   gravity: 10
   camMover: {fileID: 0}
   cameraSpeed: 100
-  groundCheckYOffset: -0.8
-  groundCheckradius: 0.3
+  groundCheckYOffset: -0.65
+  groundCheckradius: 0.43
   ground:
     serializedVersion: 2
     m_Bits: 256
