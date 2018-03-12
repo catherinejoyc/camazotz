@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
 
+    //Movement
     public Rigidbody rb;
     public float speed = 17.5f;
     public float jumpSpeed;
@@ -20,6 +22,38 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask ground;
     bool isGrounded;
 
+    //Health
+    private float health = 100f;
+    public float Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            health = value;
+            print("Health: " + health);
+            if (health <= 0)
+                Die();
+        }
+    }
+
+    //healthpack
+    private int healthpacks;
+    public int Healthpacks
+    {
+        get
+        {
+            return healthpacks;
+        }
+        set
+        {
+            healthpacks = value;
+            print("Healthpacks: " + healthpacks);
+        }
+    }
+
 	// Update is called once per frame
 	void Update () {
         //Ausrichtung
@@ -27,6 +61,10 @@ public class PlayerScript : MonoBehaviour {
         //Kamera
         camMover.transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal_right"), 0) * cameraSpeed * Time.deltaTime);
         camMover.transform.position = this.transform.position;
+
+        //Heal
+        if (Input.GetButtonDown("Fire3"))
+            Heal();
     }
 
     private void FixedUpdate()
@@ -56,6 +94,25 @@ public class PlayerScript : MonoBehaviour {
         }
         //Gravity
         rb.AddForce(new Vector3(0, -gravity, 0));
+    }
+
+    public void CollectHealthpack()
+    {
+        Healthpacks++;
+    }
+
+    void Heal()
+    {
+        if(Healthpacks >= 1)
+        {
+            Health += 5;
+            Healthpacks--;
+        }
+    }
+
+    void Die()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void OnDrawGizmos()

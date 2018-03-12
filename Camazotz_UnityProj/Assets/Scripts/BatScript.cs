@@ -27,45 +27,23 @@ public class BatScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //Angriff
+        //Player in Radius
         if (target != null)
         {
             //check if player is in sight
             Physics.Raycast(currPos, target.transform.position - currPos, out rayHit, 20f, ignoreLayer);
+
             if (rayHit.collider.gameObject.CompareTag("Player"))
             {
-                Debug.DrawLine(currPos, target.transform.position);
-                this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, Time.deltaTime * 2);
+                this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, Time.deltaTime * 10);
             }
             else
-                print(rayHit.collider.gameObject.name);
+                Idle();
         }
         else
         {
-            //Neue Base-Position
-            if (this.transform.position.x != currPos.x || this.transform.position.z != currPos.z)
-                getNewPos = true;
-            if (getNewPos)
-            {
-                currPos = this.transform.position;
-                getNewPos = false;
-            }
-            if (currPos.y > 1.5f)
-                currPos.y = 1.5f;
-
             //Idle
-            if (!up)
-            {
-                this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(currPos.x, currPos.y + 1, currPos.z), Time.deltaTime);
-                if(this.transform.position.y >= currPos.y + 1)
-                    up = true;
-            }
-            else
-            {
-                this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(currPos.x, currPos.y, currPos.z), Time.deltaTime);
-                if (this.transform.position.y <= currPos.y)
-                    up = false;
-            }
+            Idle();
         }
 	}
 
@@ -81,9 +59,43 @@ public class BatScript : MonoBehaviour {
             target = null;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerScript>().Health--;
+        }
+    }
+
     public void Die()
     {
         rb.useGravity = true;
-        this.GetComponent<BatScript>().enabled = false;
+        Destroy(this.GetComponent<BatScript>());
+    }
+
+    public void Idle()
+    {
+        //Neue Base-Position
+        if (this.gameObject.transform.position.x != currPos.x || this.gameObject.transform.position.z != currPos.z)
+            getNewPos = true;
+
+        if (getNewPos)
+        {
+            currPos = this.gameObject.transform.position;
+            getNewPos = false;
+        }
+
+        if (!up)
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(currPos.x, 2.5f, currPos.z), Time.deltaTime);
+            if (this.transform.position.y >= 2.5f)
+                up = true;
+        }
+        else
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(currPos.x, currPos.y, currPos.z), Time.deltaTime);
+            if (this.transform.position.y <= currPos.y)
+                up = false;
+        }
     }
 }
