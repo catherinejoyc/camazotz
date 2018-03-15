@@ -96,9 +96,9 @@ public class PlayerScript : MonoBehaviour {
         rb.AddForce(new Vector3(0, -gravity, 0));
     }
 
-    public void CollectHealthpack()
+    public void CollectHealthpack(int number)
     {
-        Healthpacks++;
+        Healthpacks += number;
     }
 
     void Heal()
@@ -106,6 +106,8 @@ public class PlayerScript : MonoBehaviour {
         if(Healthpacks >= 1)
         {
             Health += 5;
+            if (Health > 100)
+                Health = 100;
             Healthpacks--;
         }
     }

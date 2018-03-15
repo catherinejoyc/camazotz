@@ -5,14 +5,27 @@ using UnityEngine.Events;
 
 public class InteractableScript : MonoBehaviour
 {
+    //Key Behaviour
+    public void UnlockObject()
+    {
+        GameObject lockedObj = this.gameObject;
+        lockedObj.GetComponent<InteractableScript>().unlocked = true;
+    }
+
+    //Chests and unlocked Doorswitches Behaviour
+    public bool unlocked;
+
+    //basic interactions
     public UnityEvent Interact;
     bool active;
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Update () {
         if (Input.GetButtonDown("Fire1") && active)
         {
-            Interact.Invoke();
+            if (unlocked)
+                Interact.Invoke();
+            else
+                print("key needed!");
         }
 	}
 

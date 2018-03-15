@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84752669452c1d84b80b2ca4a6e6ef48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedObj: {fileID: 0}
+  unlocked: 1
   Interact:
     m_PersistentCalls:
       m_Calls:

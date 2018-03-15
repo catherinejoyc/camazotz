@@ -8,7 +8,7 @@ public class Frequency : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Bat"))
+        if (other.CompareTag("Bat") && other.gameObject.GetComponent<BatScript>() != null)
             other.gameObject.GetComponent<BatScript>().Die();
     }
 

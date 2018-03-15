@@ -80,10 +80,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BatScript.cs" />
     <Compile Include="Assets\Scripts\DoorScript.cs" />
-    <Compile Include="Assets\Scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\Frequency.cs" />
     <Compile Include="Assets\Scripts\InteractableScript.cs" />
-    <Compile Include="Assets\Scripts\LightScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
