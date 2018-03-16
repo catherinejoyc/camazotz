@@ -33,9 +33,11 @@ public class PlayerScript : MonoBehaviour {
         set
         {
             health = value;
-            print("Health: " + health);
+            if (health > 100)
+                health = 100;
             if (health <= 0)
                 Die();
+            UIManager.MyInstance.txt_health.text = "Health: " + health.ToString();
         }
     }
 
@@ -50,7 +52,7 @@ public class PlayerScript : MonoBehaviour {
         set
         {
             healthpacks = value;
-            print("Healthpacks: " + healthpacks);
+            UIManager.MyInstance.txt_healthpacks.text = "Healthpacks: " + healthpacks.ToString();
         }
     }
 
@@ -103,12 +105,11 @@ public class PlayerScript : MonoBehaviour {
 
     void Heal()
     {
-        if(Healthpacks >= 1)
+        if(Healthpacks >= 1 && Health != 100)
         {
             Health += 5;
-            if (Health > 100)
-                Health = 100;
             Healthpacks--;
+            UIManager.MyInstance.txt_statusUpdate.text = "Healed!" ;
         }
     }
 

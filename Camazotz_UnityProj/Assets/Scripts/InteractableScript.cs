@@ -25,9 +25,14 @@ public class InteractableScript : MonoBehaviour
             if (unlocked)
                 Interact.Invoke();
             else
-                print("key needed!");
+                UIManager.MyInstance.txt_statusUpdate.text = "Key needed!" ;
         }
 	}
+
+    public void UpdateStatus(string message)
+    {
+        UIManager.MyInstance.txt_statusUpdate.text = message;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

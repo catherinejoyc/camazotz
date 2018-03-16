@@ -24,8 +24,13 @@ public class Frequency : MonoBehaviour {
         {
             if (cooldStart + 3f <= Time.time)
             {
+                UIManager.MyInstance.txt_hfr.text = "HFR activated!";
                 GetComponent<Collider>().enabled = true;
                 cooldStart = Time.time;
+            }
+            else
+            {
+                UIManager.MyInstance.txt_hfr.text = "HFR not ready!";
             }
         }
         else
