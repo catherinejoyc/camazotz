@@ -111,7 +111,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 342}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 56
+  controlID: 75
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 342}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 136
+  controlID: 52
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -374,9 +374,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.1478424, y: -28.80621, z: -29.061718}
+    m_Target: {x: -4.5290775, y: -24.837898, z: -29.23872}
     speed: 2
-    m_Value: {x: -0.1478424, y: -28.80621, z: -29.061718}
+    m_Value: {x: -4.5290775, y: -24.837898, z: -29.23872}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -399,13 +399,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.3684235, y: -0.560135, z: 0.30527222, w: 0.67626727}
+    m_Target: {x: 0.1870859, y: -0.80803776, z: 0.34300637, w: 0.44095108}
     speed: 2
-    m_Value: {x: 0.36842063, y: -0.56013066, z: 0.30526987, w: 0.676262}
+    m_Value: {x: 0.18708427, y: -0.8080307, z: 0.3430034, w: 0.44094723}
   m_Size:
-    m_Target: 96.82578
+    m_Target: 70.96346
     speed: 2
-    m_Value: 96.82578
+    m_Value: 70.96346
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -566,21 +566,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 34cdffff40cdffff44fbffff1afcffff00000000ae270000
+    m_ExpandedIDs: 1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Particle System
-      m_OriginalName: Particle System
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -1636
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 4
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 9}
     m_SearchString: 
@@ -686,19 +686,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Art
   m_ViewMode: 1
   m_StartGridSize: 75
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Art
   m_LastFoldersGridSize: 75
   m_LastProjectPath: E:\CatJoy\3AHMNG\jahresprojekt17_18_camazotz\Unity Project\Camazotz_Repository\Camazotz_UnityProj
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 22260000
-    m_LastClickedID: 9762
-    m_ExpandedIDs: 00000000f4250000222600007826000000ca9a3bffffff7f
+    m_SelectedIDs: 0a2c0000
+    m_LastClickedID: 11274
+    m_ExpandedIDs: 00000000f6250000262600000a2c0000102c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -726,7 +726,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f42500002226000078260000
+    m_ExpandedIDs: 00000000f6250000262600007c260000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
