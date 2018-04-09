@@ -2,16 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BatScript : MonoBehaviour {
 
-    bool active;
-    Vector3 currPos;
-
-    bool getNewPos;
-    bool up;
-
     public Rigidbody rb;
+    NavMeshAgent agent;
 
     GameObject target;
     RaycastHit rayHit;
@@ -20,9 +16,9 @@ public class BatScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        currPos = this.transform.position;
         ignoreLayer = ~thisCollider;
-	}
+        agent = GetComponent<NavMeshAgent>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,30 +27,25 @@ public class BatScript : MonoBehaviour {
         if (target != null)
         {
             //check if player is in sight
-            Physics.Raycast(currPos, target.transform.position - currPos, out rayHit, 20f, ignoreLayer);
-
+            Physics.Raycast(this.transform.position, target.transform.position - this.transform.position, out rayHit, 20f, ignoreLayer);
             if (rayHit.collider.gameObject.CompareTag("Player"))
             {
-                this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, Time.deltaTime * 10);
+                //this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, Time.deltaTime * 10);
+                agent.SetDestination(target.transform.position);
             }
-            else
-                Idle();
-        }
-        else
-        {
-            //Idle
-            Idle();
         }
 	}
 
     private void OnTriggerEnter(Collider other)
     {
+        //Player in Radius
         if (other.CompareTag("Player"))
             target = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
     {
+        //Player out of Radius
         if (other.CompareTag("Player"))
             target = null;
     }
@@ -71,31 +62,5 @@ public class BatScript : MonoBehaviour {
     {
         rb.useGravity = true;
         Destroy(this.GetComponent<BatScript>());
-    }
-
-    public void Idle()
-    {
-        //Neue Base-Position
-        if (this.gameObject.transform.position.x != currPos.x || this.gameObject.transform.position.z != currPos.z)
-            getNewPos = true;
-
-        if (getNewPos)
-        {
-            currPos = this.gameObject.transform.position;
-            getNewPos = false;
-        }
-
-        if (!up)
-        {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(currPos.x, 2.5f, currPos.z), Time.deltaTime);
-            if (this.transform.position.y >= 2.5f)
-                up = true;
-        }
-        else
-        {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, new Vector3(currPos.x, currPos.y, currPos.z), Time.deltaTime);
-            if (this.transform.position.y <= currPos.y)
-                up = false;
-        }
     }
 }
