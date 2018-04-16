@@ -1,0 +1,162 @@
+fileFormatVersion: 2
+guid: ea85cc8b53e069f458b990d5c21004f7
+timeCreated: 1523878369
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Hebel
+    100002: key
+    100004: lamp
+    100006: meattable1x3
+    100008: meattable2x8
+    100010: //RootNode
+    100012: pCube14
+    100014: pCube17
+    100016: pCube28
+    100018: pCube29
+    100020: polySurface14
+    100022: polySurface6
+    100024: polySurface7
+    100026: polySurface8
+    100028: Schalter
+    100030: woodentable1x2
+    100032: x2x3_regal
+    400000: Hebel
+    400002: key
+    400004: lamp
+    400006: meattable1x3
+    400008: meattable2x8
+    400010: //RootNode
+    400012: pCube14
+    400014: pCube17
+    400016: pCube28
+    400018: pCube29
+    400020: polySurface14
+    400022: polySurface6
+    400024: polySurface7
+    400026: polySurface8
+    400028: Schalter
+    400030: woodentable1x2
+    400032: x2x3_regal
+    2300000: Hebel
+    2300002: key
+    2300004: lamp
+    2300006: meattable1x3
+    2300008: meattable2x8
+    2300010: pCube14
+    2300012: pCube17
+    2300014: pCube28
+    2300016: pCube29
+    2300018: polySurface14
+    2300020: polySurface7
+    2300022: polySurface8
+    2300024: Schalter
+    2300026: woodentable1x2
+    2300028: x2x3_regal
+    3300000: Hebel
+    3300002: key
+    3300004: lamp
+    3300006: meattable1x3
+    3300008: meattable2x8
+    3300010: pCube14
+    3300012: pCube17
+    3300014: pCube28
+    3300016: pCube29
+    3300018: polySurface14
+    3300020: polySurface7
+    3300022: polySurface8
+    3300024: Schalter
+    3300026: woodentable1x2
+    3300028: x2x3_regal
+    4300000: Schalter
+    4300002: Hebel
+    4300004: x2x3_regal
+    4300006: woodentable1x2
+    4300008: lamp
+    4300010: key
+    4300012: meattable1x3
+    4300014: meattable2x8
+    4300016: pCube14
+    4300018: polySurface7
+    4300020: polySurface8
+    4300022: pCube17
+    4300024: pCube28
+    4300026: pCube29
+    4300028: polySurface14
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
