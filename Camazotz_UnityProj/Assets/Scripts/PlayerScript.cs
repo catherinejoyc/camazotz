@@ -14,13 +14,14 @@ public class PlayerScript : MonoBehaviour {
     private Vector3 playerMovement;
     private Vector3 correctedMovement;
 
-    public GameObject camMover;
-    public float cameraSpeed;
-
     public float groundCheckYOffset;
     public float groundCheckradius;
     public LayerMask ground;
     bool isGrounded;
+
+    //Kamera
+    public GameObject camMover;
+    public float cameraSpeed;
 
     //Health
     private float health = 100f;
@@ -41,7 +42,7 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-    //healthpack
+    //Healthpack
     private int healthpacks;
     public int Healthpacks
     {
@@ -67,6 +68,13 @@ public class PlayerScript : MonoBehaviour {
         //Heal
         if (Input.GetButtonDown("Fire3"))
             Heal();
+    }
+
+    private void LateUpdate()
+    {
+        //Kamera - Wand Collision
+        RaycastHit wallHit = new RaycastHit();
+
     }
 
     private void FixedUpdate()
