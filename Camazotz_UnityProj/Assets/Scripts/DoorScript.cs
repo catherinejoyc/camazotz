@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour {
 
-    public Vector3 openPos;
+    Vector3 openPos;
     Vector3 closedPos;
     Vector3 target;
     public bool open;
@@ -12,7 +12,8 @@ public class DoorScript : MonoBehaviour {
 
     private void Start()
     {
-        closedPos = new Vector3(openPos.x, openPos.y - 3f, openPos.z);
+        closedPos = new Vector3(transform.position.x, 0f, transform.position.z);
+        openPos = new Vector3(transform.position.x, 3f, transform.position.z);
         target = this.transform.position;
     }
 

@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 4390930078570482}
   - component: {fileID: 33224680146924702}
   - component: {fileID: 23206777003892948}
+  - component: {fileID: 114597970296467962}
+  - component: {fileID: 65858484631522610}
   m_Layer: 0
   m_Name: Hebel
   m_TagString: Untagged
@@ -73,7 +75,7 @@ Transform:
   - {fileID: 4390930078570482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!23 &23152661377186158
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -164,6 +166,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 250.0122, y: 100, z: 193.53777}
   m_Center: {x: -47.56317, y: 148.9376, z: 86.40454}
+--- !u!65 &65858484631522610
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1789832707187186}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200.21451, y: 28.510206, z: 177.23877}
+  m_Center: {x: -18.680357, y: -22.735235, z: 84.11031}
 --- !u!114 &114452870732518758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,20 +189,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84752669452c1d84b80b2ca4a6e6ef48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 1
+  unlocked: 0
   Interact:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: ToggleDoor
-        m_Mode: 1
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &114597970296467962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1789832707187186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84752669452c1d84b80b2ca4a6e6ef48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlocked: 1
+  Interact:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
