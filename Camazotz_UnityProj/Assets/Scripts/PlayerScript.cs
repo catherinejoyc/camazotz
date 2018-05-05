@@ -31,6 +31,10 @@ public class PlayerScript : MonoBehaviour {
     public LayerMask ground;
     bool isGrounded;
 
+    //Disable Movement
+    float startTimeMD;
+    float timeDisabled;
+
     //Kamera
     public GameObject camMoverY;
     public GameObject camMoverX;
@@ -96,8 +100,11 @@ public class PlayerScript : MonoBehaviour {
     private void FixedUpdate()
     {
         //Laufen
-        playerMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * speed;
-        rb.AddForce(correctedMovement);
+        if (startTimeMD + timeDisabled < Time.time)
+        {
+            playerMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * speed;
+            rb.AddForce(correctedMovement);
+        }
 
         //Animation
         if (rb.velocity.magnitude > 0.01f)
@@ -166,6 +173,19 @@ public class PlayerScript : MonoBehaviour {
     void Die()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void DisableMovement(string cause)
+    {
+        switch (cause)
+        {
+            case "hfr":
+                timeDisabled = 4f;
+                break;
+            default:
+                break;
+        }
+        startTimeMD = Time.time;
     }
 
     private void OnDrawGizmos()

@@ -14,6 +14,8 @@ public class BatScript : MonoBehaviour {
     public LayerMask thisCollider;
     LayerMask ignoreLayer;
 
+    public Animator anim;
+
     // Use this for initialization
     void Start () {
         ignoreLayer = ~thisCollider;
@@ -60,7 +62,11 @@ public class BatScript : MonoBehaviour {
 
     public void Die()
     {
+        Destroy(this.GetComponent<NavMeshAgent>());
         rb.useGravity = true;
+        anim.SetTrigger("death");
+        Destroy(GetComponent<Rigidbody>(), 2f);
+        Destroy(GetComponent<BoxCollider>(), 3f);
         Destroy(this.GetComponent<BatScript>());
     }
 }
