@@ -6,6 +6,8 @@ public class Frequency : MonoBehaviour {
 
     float cooldStart = -3;
 
+    public GameObject player;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bat") && other.gameObject.GetComponent<BatScript>() != null)
@@ -20,20 +22,24 @@ public class Frequency : MonoBehaviour {
     private void Update()
     {
         //Frequency Attack
-        if (Input.GetButton("Fire2"))
+        if (Input.GetButtonDown("Fire2") && cooldStart + 3f <= Time.time)
         {
-            if (cooldStart + 3f <= Time.time)
-            {
-                UIManager.MyInstance.txt_hfr.text = "HFR activated!";
-                GetComponent<Collider>().enabled = true;
-                cooldStart = Time.time;
-            }
-            else
-            {
-                UIManager.MyInstance.txt_hfr.text = "HFR not ready!";
-            }
+            player.GetComponentInChildren<Animator>().SetTrigger("hfr_attack");
+            player.GetComponent<PlayerScript>().DisableMovement("hfr_attack");
+            UIManager.MyInstance.ActivationProcess(2f);
+            Invoke("Attack", 2f);
         }
         else
             GetComponent<Collider>().enabled = false;
+
+        //Cooldown
+        UIManager.MyInstance.hfr_fill.fillAmount += Time.deltaTime / 3f;
+    }
+
+    void Attack()
+    {
+        GetComponent<Collider>().enabled = true;
+        cooldStart = Time.time;
+        UIManager.MyInstance.hfr_fill.fillAmount = 0;
     }
 }

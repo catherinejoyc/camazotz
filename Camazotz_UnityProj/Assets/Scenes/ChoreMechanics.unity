@@ -1062,6 +1062,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4249692396297808, guid: 717f0c9e4af699640857d6a100cc6c7b,
     type: 2}
   m_PrefabInternal: {fileID: 1084973315}
+--- !u!1001 &806208571
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.498
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 3.027
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4147265663303752, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6d911601832712d47bb09c41e9bfb8f0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &845861179
 Prefab:
   m_ObjectHideFlags: 0
@@ -1462,7 +1504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1111448690
 Light:
   m_ObjectHideFlags: 0

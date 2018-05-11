@@ -55,7 +55,7 @@ public class PlayerScript : MonoBehaviour {
                 health = 100;
             if (health <= 0)
                 Die();
-            UIManager.MyInstance.txt_health.text = "Health: " + health.ToString();
+            UIManager.MyInstance.healthbar.value = health;
         }
     }
 
@@ -70,12 +70,37 @@ public class PlayerScript : MonoBehaviour {
         set
         {
             healthpacks = value;
-            UIManager.MyInstance.txt_healthpacks.text = "Healthpacks: " + healthpacks.ToString();
+            UIManager.MyInstance.txt_healthpacks.text = healthpacks.ToString();
         }
+    }
+
+    float timeOfLastHeal;
+
+    void Heal()
+    {
+        if(Healthpacks >= 1 && Health != 100)
+        {
+            UIManager.MyInstance.ActivationProcess(1f);
+            Invoke("_Heal", 1f);
+        }
+    }
+    void _Heal()
+    {
+        Health += 5;
+        Healthpacks--;
+        UIManager.MyInstance.txt_statusUpdate.text = "I feel better now.";
+        UIManager.MyInstance.statusChanged = true;
     }
 
     //Animation
     public Animator anim;
+
+    //Game Over
+    bool winning = false;
+    void GameOver()
+    {
+        GameManager.MyInstance.GameOver();
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -87,8 +112,19 @@ public class PlayerScript : MonoBehaviour {
         camMoverY.transform.position = transform.position;
 
         //Heal
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire3") && timeOfLastHeal + 1 < Time.time)
+        {
+            timeOfLastHeal = Time.time;
             Heal();
+        }
+
+        //Game Over
+        if (winning && Input.GetButtonDown("Fire1"))
+        {
+            DisableMovement("heart");
+            UIManager.MyInstance.ActivationProcess(2f);
+            Invoke("GameOver", 2f);
+        }
     }
 
     private void LateUpdate()
@@ -126,11 +162,11 @@ public class PlayerScript : MonoBehaviour {
 
         //Ausrichtung
         correctedMovement = camMoverY.transform.TransformDirection(playerMovement);
-        if (correctedMovement.sqrMagnitude > 0.1f)
+        if (correctedMovement.sqrMagnitude > 0.1f && startTimeMD + timeDisabled < Time.time)
             rb.rotation = Quaternion.LookRotation(correctedMovement);
 
         //Springen
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && startTimeMD + timeDisabled < Time.time)
         {
             rb.velocity = new Vector3(rb.velocity.x/5, 0, rb.velocity.z/5);
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
@@ -160,32 +196,46 @@ public class PlayerScript : MonoBehaviour {
         Healthpacks += number;
     }
 
-    void Heal()
-    {
-        if(Healthpacks >= 1 && Health != 100)
-        {
-            Health += 5;
-            Healthpacks--;
-            UIManager.MyInstance.txt_statusUpdate.text = "Healed!" ;
-        }
-    }
-
     void Die()
     {
-        SceneManager.LoadScene(0);
+        GameManager.MyInstance.OnPlayerRespawn();
+        health = 100f;
     }
 
     public void DisableMovement(string cause)
     {
         switch (cause)
         {
-            case "hfr":
+            case "hfr_pickUp":
                 timeDisabled = 4f;
+                break;
+            case "hfr_attack":
+                timeDisabled = 2f;
+                break;
+            case "heart":
+                timeDisabled = 2f;
                 break;
             default:
                 break;
         }
         startTimeMD = Time.time;
+    }
+
+    //Heart
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Heart"))
+        {
+            winning = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Heart"))
+        {
+            winning = false;
+        }
     }
 
     private void OnDrawGizmos()

@@ -79,12 +79,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BatScript.cs" />
+    <Compile Include="Assets\Scripts\CamazotzScript.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\CheckpointScript.cs" />
     <Compile Include="Assets\Scripts\DoorScript.cs" />
     <Compile Include="Assets\Scripts\Frequency.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InteractableScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScript.cs" />
-    <Compile Include="Assets\Scripts\SwitchScript.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

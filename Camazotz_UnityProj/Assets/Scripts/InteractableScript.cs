@@ -14,6 +14,7 @@ public class InteractableScript : MonoBehaviour
 
     //Chests and unlocked Doorswitches Behaviour
     public bool unlocked;
+    public string lockedMessage;
 
     //basic interactions
     public UnityEvent Interact;
@@ -25,13 +26,17 @@ public class InteractableScript : MonoBehaviour
             if (unlocked)
                 Interact.Invoke();
             else
-                UIManager.MyInstance.txt_statusUpdate.text = "Key needed!" ;
+            {
+                UIManager.MyInstance.txt_statusUpdate.text = lockedMessage;
+                UIManager.MyInstance.statusChanged = true;
+            }
         }
 	}
 
     public void UpdateStatus(string message)
     {
         UIManager.MyInstance.txt_statusUpdate.text = message;
+        UIManager.MyInstance.statusChanged = true;
     }
 
     private void OnTriggerEnter(Collider other)
