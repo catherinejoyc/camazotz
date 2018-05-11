@@ -24,3 +24,7 @@ Das Ziel: den Todesgott Camazotz vernichten, indem er die Quelle seiner Macht fi
 - Interagieren/Aufsammeln - A
 - HFR (Angriff) - B
 - Verband verwenden (Heilung) - X
+
+### BUGS
+- Manchmal funktioniert das Respawnen der Fledermäuse nicht
+- Aus unerklärlichen Gründen sterben manchmal Fledermäuse durch die Waffe nicht (passiert selten, aber doch)
