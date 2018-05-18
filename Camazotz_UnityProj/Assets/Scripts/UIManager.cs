@@ -22,6 +22,31 @@ public class UIManager : MonoBehaviour {
             Debug.LogError("Singleton already exists!");
     }
 
+    //Update
+    private void Update()
+    {
+        //Activation Process
+        if (activated)
+        {
+            activationBar.value += Time.deltaTime / processTime;
+            Invoke("Deactivate", processTime);
+        }
+
+        //Status Log Mission Log
+        if (statusChanged)
+        {
+            Invoke("StatusReset", 3f);
+        }
+
+        //Controls Text
+        if (ctrl_start + 10f < Time.time)
+            txt_controls.text = "";
+    }
+
+
+
+    // ------------------------------------------------------------------------ //
+
     //activate
     public Slider activationBar;
 
@@ -42,36 +67,28 @@ public class UIManager : MonoBehaviour {
         activated = false;
     }
 
-    private void Update()
-    {
-        //Activation Process
-        if (activated)
-        {
-            activationBar.value += Time.deltaTime / processTime;
-            Invoke("Deactivate", processTime);
-        }
-
-        //Status Log Mission Log
-        if (statusChanged)
-        {
-            Invoke("StatusReset", 3f);
-        }
-    }
 
     //Status
     public Text txt_statusUpdate;
     public bool statusChanged;
-
     public void UpdateStatus(string message)
     {
         txt_statusUpdate.text = message;
         statusChanged = true;
     }
-
     private void StatusReset()
     {
         txt_statusUpdate.text = "";
         statusChanged = false;
+    }
+
+    //Controls
+    public Text txt_controls;
+    float ctrl_start;
+    public void NewControlsText(string message)
+    {
+        txt_controls.text = message;
+        ctrl_start = Time.time;
     }
 
     //hfr

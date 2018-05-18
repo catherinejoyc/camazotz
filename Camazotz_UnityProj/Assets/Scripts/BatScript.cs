@@ -85,7 +85,6 @@ public class BatScript : MonoBehaviour {
     public void OnPlayerRespawn()
     {
         target = null;
-
         
         agent.baseOffset = 3.2f;
         agent.destination = startPos;
