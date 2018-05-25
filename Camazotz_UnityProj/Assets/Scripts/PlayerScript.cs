@@ -86,10 +86,9 @@ public class PlayerScript : MonoBehaviour {
     }
     void _Heal()
     {
-        Health += 5;
+        Health += 20;
         Healthpacks--;
-        UIManager.MyInstance.txt_statusUpdate.text = "I feel better now.";
-        UIManager.MyInstance.statusChanged = true;
+        UIManager.MyInstance.UpdateStatus("I feel better now.");
     }
 
     //Animation

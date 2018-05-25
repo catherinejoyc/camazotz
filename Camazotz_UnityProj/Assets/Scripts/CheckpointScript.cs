@@ -13,8 +13,7 @@ public class CheckpointScript : MonoBehaviour {
             //Checkpoint
             GameManager.MyInstance.lastCheckpoint = this;
 
-            UIManager.MyInstance.txt_statusUpdate.text = "I sense danger.";
-            UIManager.MyInstance.statusChanged = true;
+            UIManager.MyInstance.UpdateStatus("I sense danger.");
 
             GameManager.MyInstance.spawnArea = area;
 

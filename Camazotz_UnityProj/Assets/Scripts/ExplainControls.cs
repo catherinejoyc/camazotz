@@ -4,27 +4,48 @@ using UnityEngine;
 
 public class ExplainControls : MonoBehaviour {
 
-    public string controllerControls;
-    public string keyboardControls;
+    string controllerControls;
+    string keyboardControls;
 
     string controlText;
 
     private void Start()
     {
-        controllerControls = "Use your Left Joystick to Move and Y to Jump. Move your Right Joystick to Look Around.";
-        keyboardControls = "Use W, A, S, D to Move and Space to Jump. Use Arrows to Look Around.";
-
-        UIManager.MyInstance.NewControlsText(controlText);
+        if (Input.GetJoystickNames().Length > 0)
+            controlText = controllerControls;
+        else
+            controlText = keyboardControls;
     }
 
     private void Update()
     {
-
+        if (Input.GetJoystickNames().Length > 0)
+            controlText = controllerControls;
+        else
+            controlText = keyboardControls;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        UIManager.MyInstance.NewControlsText(controlText);
-    }
+        switch (this.gameObject.name)
+        {
+            case "RunAndJump":
+                controllerControls = "Use your Left Joystick to Run. \n Press Y to Jump.";
+                keyboardControls = "Use W,A,S,D to Run. \n Press Space to Jump.";
+                break;
+            case "Interact":
+                controllerControls = "Press A to Interact with Objects.";
+                keyboardControls = "Press CTRL to Interact with Objects.";
+                break;
+            case "Collect":
+                controllerControls = "Press A to Collect Objects.";
+                keyboardControls = "Press CTRL to Collect Objects.";
+                break;
+            case "HFR":
+                controllerControls = "Press B to Attack.";
+                keyboardControls = "Press Alt to Attack.";
+                break;
+        }
 
+    }
 }

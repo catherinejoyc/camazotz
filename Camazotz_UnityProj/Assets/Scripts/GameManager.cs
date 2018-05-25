@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour {
             Debug.LogError("Singleton already exists!");
     }
 
+    private void Update()
+    {
+        // Area7
+        AllFencesInRoom.transform.position = Vector3.MoveTowards(AllFencesInRoom.transform.position, sinkPos, 2f * Time.deltaTime);
+    }
+
     //Checkpoint
     public CheckpointScript lastCheckpoint;
     public GameObject spawnArea;
@@ -44,4 +50,32 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.LoadScene("GameOver");
     }
+
+    // --- Special Events ---
+    // Area7
+    public GameObject AllFencesInRoom;
+    Vector3 sinkPos = new Vector3();
+    public void ExitArea7()
+    {
+        //All Lights out for 2 Seconds
+        ToggleLight();
+
+        //All fences sink into the ground
+        sinkPos = new Vector3(AllFencesInRoom.transform.position.x, AllFencesInRoom.transform.position.y - 3f, AllFencesInRoom.transform.position.z);
+
+        //Turn Lights on again
+        Invoke("ToggleLight", 1f);
+    }
+    void ToggleLight()
+    {
+        foreach (Light _light in FindObjectsOfType<Light>())
+        {
+            if (_light.enabled)
+                _light.enabled = false;
+            else
+                _light.enabled = true;
+        }
+    }
+
+
 }

@@ -27,16 +27,14 @@ public class InteractableScript : MonoBehaviour
                 Interact.Invoke();
             else
             {
-                UIManager.MyInstance.txt_statusUpdate.text = lockedMessage;
-                UIManager.MyInstance.statusChanged = true;
+                UIManager.MyInstance.UpdateStatus(lockedMessage);
             }
         }
 	}
 
     public void UpdateStatus(string message)
     {
-        UIManager.MyInstance.txt_statusUpdate.text = message;
-        UIManager.MyInstance.statusChanged = true;
+        UIManager.MyInstance.UpdateStatus(message);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -33,21 +33,24 @@ public class UIManager : MonoBehaviour {
         }
 
         //Status Log Mission Log
-        if (statusChanged)
+        if (status_startTime + 3f < Time.time)
         {
-            Invoke("StatusReset", 3f);
+            txt_statusUpdate.text = "";
         }
 
         //Controls Text
-        if (ctrl_start + 10f < Time.time)
-            txt_controls.text = "";
+        //if (ctrl_start + 5f < Time.time)
+        //    txt_controls.text = "";
+
+        if (Input.GetButtonDown("Submit"))
+            ToggleControls();
     }
 
 
 
     // ------------------------------------------------------------------------ //
 
-    //activate
+    //Activation Process
     public Slider activationBar;
 
     bool activated = false;
@@ -67,31 +70,33 @@ public class UIManager : MonoBehaviour {
         activated = false;
     }
 
-
-    //Status
+    //Status Log Mission Log
     public Text txt_statusUpdate;
-    public bool statusChanged;
+    float status_startTime;
     public void UpdateStatus(string message)
     {
         txt_statusUpdate.text = message;
-        statusChanged = true;
-    }
-    private void StatusReset()
-    {
-        txt_statusUpdate.text = "";
-        statusChanged = false;
+        status_startTime = Time.time;
     }
 
-    //Controls
-    public Text txt_controls;
-    float ctrl_start;
-    public void NewControlsText(string message)
+    //Controls Text
+    public Text showControls;
+    public Text controls;
+    void ToggleControls()
     {
-        txt_controls.text = message;
-        ctrl_start = Time.time;
+        if (controls.enabled)
+        {
+            showControls.text = "Enter/Start - Show Controls";
+            controls.enabled = false;
+        }
+        else
+        {
+            showControls.text = "Enter/Start - Hide Controls";
+            controls.enabled = true;
+        }
     }
 
-    //hfr
+    //HFR
     public Image hfr_fill;
 
     //Player
