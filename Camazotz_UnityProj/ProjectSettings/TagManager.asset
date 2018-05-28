@@ -8,6 +8,8 @@ TagManager:
   - Healthpack
   - Camazotz
   - Heart
+  - Wall
+  - Bat_Body
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - Bat
   - Locked
   - Camazotz
-  - 
+  - Camera
   - 
   - 
   - 

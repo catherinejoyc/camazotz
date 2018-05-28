@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
 
     public void GameOver()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("StartScreen");
     }
 
     // --- Special Events ---
@@ -76,6 +76,4 @@ public class GameManager : MonoBehaviour {
                 _light.enabled = true;
         }
     }
-
-
 }

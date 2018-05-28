@@ -8,15 +8,20 @@ public class Frequency : MonoBehaviour {
 
     public GameObject player;
 
-    private void OnTriggerEnter(Collider other)
+    ParticleSystem effect;
+
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Bat") && other.gameObject.GetComponent<BatScript>() != null)
-            other.gameObject.GetComponent<BatScript>().Die();
+        // Kill Bats
+        if (other.CompareTag("Bat_Body") && other.gameObject.GetComponentInParent<BatScript>() != null)
+            other.gameObject.GetComponentInParent<BatScript>().Die();
     }
 
     private void Awake()
     {
         GetComponent<Collider>().enabled = false;
+        effect = GetComponentInChildren<ParticleSystem>();
+        effect.Stop();
     }
 
     private void Update()
@@ -24,10 +29,11 @@ public class Frequency : MonoBehaviour {
         //Frequency Attack
         if (Input.GetButtonDown("Fire2") && cooldStart + 3f <= Time.time)
         {
+            effect.Play();
             player.GetComponentInChildren<Animator>().SetTrigger("hfr_attack");
             player.GetComponent<PlayerScript>().DisableMovement("hfr_attack");
-            UIManager.MyInstance.ActivationProcess(2f);
-            Invoke("Attack", 2f);
+            UIManager.MyInstance.ActivationProcess(1f);
+            Invoke("Attack", 1f);
         }
         else
             GetComponent<Collider>().enabled = false;
@@ -39,6 +45,7 @@ public class Frequency : MonoBehaviour {
     void Attack()
     {
         GetComponent<Collider>().enabled = true;
+        effect.Stop();
         cooldStart = Time.time;
         UIManager.MyInstance.hfr_fill.fillAmount = 0;
     }

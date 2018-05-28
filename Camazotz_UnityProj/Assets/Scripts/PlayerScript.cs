@@ -35,10 +35,8 @@ public class PlayerScript : MonoBehaviour {
     float startTimeMD;
     float timeDisabled;
 
-    //Kamera
-    public GameObject camMoverY;
-    public GameObject camMoverX;
-    public float cameraSpeed;
+    //Camera
+    public GameObject camMover;
 
     //Health
     private float health = 100f;
@@ -59,21 +57,6 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-    //Healthpack
-    private int healthpacks;
-    public int Healthpacks
-    {
-        get
-        {
-            return healthpacks;
-        }
-        set
-        {
-            healthpacks = value;
-            UIManager.MyInstance.txt_healthpacks.text = healthpacks.ToString();
-        }
-    }
-
     float timeOfLastHeal;
 
     void Heal()
@@ -91,6 +74,26 @@ public class PlayerScript : MonoBehaviour {
         UIManager.MyInstance.UpdateStatus("I feel better now.");
     }
 
+    //Healthpack
+    private int healthpacks;
+    public int Healthpacks
+    {
+        get
+        {
+            return healthpacks;
+        }
+        set
+        {
+            healthpacks = value;
+            UIManager.MyInstance.txt_healthpacks.text = healthpacks.ToString();
+        }
+    }
+
+    public void CollectHealthpack(int number)
+    {
+        Healthpacks += number;
+    }
+
     //Animation
     public Animator anim;
 
@@ -101,15 +104,13 @@ public class PlayerScript : MonoBehaviour {
         GameManager.MyInstance.GameOver();
     }
 
-	// Update is called once per frame
-	void Update () {
-        //Camera
-        camMoverY.transform.Rotate(new Vector3(0, Input.GetAxis("Horizontal_right")) * cameraSpeed * Time.deltaTime);
+    void Die()
+    {
+        GameManager.MyInstance.OnPlayerRespawn();
+        health = 100f;
+    }
 
-        camMoverX.transform.Rotate(new Vector3(Input.GetAxis("Vertical_right"), 0) * cameraSpeed * Time.deltaTime);
-
-        camMoverY.transform.position = transform.position;
-
+    void Update () {
         //Heal
         if (Input.GetButtonDown("Fire3") && timeOfLastHeal + 1 < Time.time)
         {
@@ -124,12 +125,6 @@ public class PlayerScript : MonoBehaviour {
             UIManager.MyInstance.ActivationProcess(2f);
             Invoke("GameOver", 2f);
         }
-    }
-
-    private void LateUpdate()
-    {
-        //Camera - Wand Collision
-        RaycastHit wallHit = new RaycastHit();
     }
 
     private void FixedUpdate()
@@ -160,9 +155,12 @@ public class PlayerScript : MonoBehaviour {
         }
 
         //Ausrichtung
-        correctedMovement = camMoverY.transform.TransformDirection(playerMovement);
+        correctedMovement = camMover.transform.TransformDirection(playerMovement);
         if (correctedMovement.sqrMagnitude > 0.1f && startTimeMD + timeDisabled < Time.time)
-            rb.rotation = Quaternion.LookRotation(correctedMovement);
+            transform.rotation = Quaternion.Euler(Vector3.Scale(camMover.transform.rotation.eulerAngles, Vector3.up));
+
+        //Quaternion.Euler(Vector3.Scale(camMover.transform.rotation.eulerAngles, Vector3.up)); doesn't rotate around z but also won't rotate around y
+        //Quaternion.LookRotation(correctedMovement); rotates around y but also around z
 
         //Springen
         if (Input.GetButtonDown("Jump") && isGrounded && startTimeMD + timeDisabled < Time.time)
@@ -190,17 +188,6 @@ public class PlayerScript : MonoBehaviour {
         rb.AddForce(new Vector3(0, -gravity, 0));
     }
 
-    public void CollectHealthpack(int number)
-    {
-        Healthpacks += number;
-    }
-
-    void Die()
-    {
-        GameManager.MyInstance.OnPlayerRespawn();
-        health = 100f;
-    }
-
     public void DisableMovement(string cause)
     {
         switch (cause)
@@ -220,9 +207,9 @@ public class PlayerScript : MonoBehaviour {
         startTimeMD = Time.time;
     }
 
-    //Heart
     private void OnTriggerEnter(Collider other)
     {
+        //Game Over
         if (other.CompareTag("Heart"))
         {
             winning = true;

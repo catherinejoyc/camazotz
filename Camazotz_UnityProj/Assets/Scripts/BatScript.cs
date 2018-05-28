@@ -8,9 +8,10 @@ public class BatScript : MonoBehaviour {
 
     public Rigidbody rb;
     NavMeshAgent agent;
+    public Light aggroLight;
 
     GameObject target;
-    RaycastHit rayHit;
+    RaycastHit hit;
     public LayerMask thisCollider;
     LayerMask ignoreLayer;
 
@@ -18,41 +19,55 @@ public class BatScript : MonoBehaviour {
 
     bool dead = false;
 
-    //Start Stats
     Vector3 startPos;
 
     // Use this for initialization
     void Start () {
         ignoreLayer = ~thisCollider;
         agent = GetComponent<NavMeshAgent>();
+
         startPos = transform.position;
+
+        aggroLight.enabled = false;
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
-        //Player in Radius
+        // Player in Radius
         if (target != null && !dead)
         {
-            //check if player is in sight
-            Physics.Raycast(this.transform.position, target.transform.position - this.transform.position, out rayHit, 20f, ignoreLayer);
-            if (rayHit.collider.gameObject.CompareTag("Player"))
+            // Look Direction
+            FaceTarget(target.transform.position);
+
+            // Activate Light
+            aggroLight.enabled = true;
+
+            // Check if player is in sight
+            Physics.Raycast(this.transform.position, target.transform.position - transform.position, out hit, 10f, ignoreLayer);
+            if (hit.collider.gameObject.CompareTag("Player"))
             {
+                // Attack player
                 agent.SetDestination(target.transform.position);
             }
+        }
+        else
+        {
+            // Deactivate Light
+            aggroLight.enabled = false;
         }
 	}
 
     private void OnTriggerEnter(Collider other)
     {
-        //Player in Radius
+        // Player in radius
         if (other.CompareTag("Player"))
             target = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //Player out of Radius
+        // Player out of radius
         if (other.CompareTag("Player"))
             target = null;
     }
@@ -61,18 +76,39 @@ public class BatScript : MonoBehaviour {
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            // Damage
             collision.gameObject.GetComponent<PlayerScript>().Health--;
+
+            // Knockback
+            agent.isStopped = true;
+            Invoke("Attack", 1f);
         }
 
-        if(dead && transform.position.y <= 0.5f)
-        {
-            GetComponent<BoxCollider>().enabled = false;
-            rb.useGravity = false;
-        }
+        //if(dead && transform.position.y <= 0.5f)
+        //{
+        //    GetComponent<BoxCollider>().enabled = false;
+        //    rb.useGravity = false;
+        //}
+    }
+
+    private void FaceTarget(Vector3 destination)
+    {
+        Vector3 lookPos = destination - transform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 1f);
+    }
+
+    void Attack()
+    {
+        if (target != null)
+            agent.SetDestination(target.transform.position);          
+        agent.isStopped = false;
     }
 
     public void Die()
     {
+        print("die");
         agent.baseOffset = 0f;
         agent.destination = transform.position;
         target = null;
