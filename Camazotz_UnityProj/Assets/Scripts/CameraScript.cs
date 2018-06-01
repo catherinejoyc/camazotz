@@ -33,7 +33,7 @@ public class CameraScript : MonoBehaviour {
     private void FixedUpdate()
     {
         //Cam mover
-        transform.Rotate(Vector3.up, Input.GetAxis("Horizontal_right") * cameraRotationSpeed * Time.fixedDeltaTime, Space.World);
+        transform.Rotate(Vector3.up, -Input.GetAxis("Horizontal_right") * cameraRotationSpeed * Time.fixedDeltaTime, Space.World);
 
         Quaternion q = transform.rotation;
         float currentRotationX = Mathf.Asin(2 * (q.w * q.x - q.z * q.y));

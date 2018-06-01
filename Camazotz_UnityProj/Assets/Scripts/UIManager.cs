@@ -102,4 +102,7 @@ public class UIManager : MonoBehaviour {
     //Player
     public Slider healthbar;
     public Text txt_healthpacks;
+
+    //BlackScreen
+    public Animator blackScreen;
 }

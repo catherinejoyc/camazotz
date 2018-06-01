@@ -75,7 +75,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     //Healthpack
-    private int healthpacks;
+    private int healthpacks = 0;
     public int Healthpacks
     {
         get
@@ -106,8 +106,10 @@ public class PlayerScript : MonoBehaviour {
 
     void Die()
     {
-        GameManager.MyInstance.OnPlayerRespawn();
-        health = 100f;
+        DisableMovement("death");
+        GameManager.MyInstance.OnPlayerDeath();
+        //GameManager.MyInstance.OnPlayerRespawn();
+        //health = 100f;
     }
 
     void Update () {
@@ -119,6 +121,9 @@ public class PlayerScript : MonoBehaviour {
         }
 
         //Game Over
+        if (winning)
+            UIManager.MyInstance.UpdateStatus("I have to pull that heart out!");
+
         if (winning && Input.GetButtonDown("Fire1"))
         {
             DisableMovement("heart");
@@ -199,6 +204,9 @@ public class PlayerScript : MonoBehaviour {
                 timeDisabled = 2f;
                 break;
             case "heart":
+                timeDisabled = 2f;
+                break;
+            case "death":
                 timeDisabled = 2f;
                 break;
             default:

@@ -19,6 +19,7 @@ public class BatScript : MonoBehaviour {
 
     bool dead = false;
 
+    // Stats
     Vector3 startPos;
 
     // Use this for initialization
@@ -31,22 +32,22 @@ public class BatScript : MonoBehaviour {
         aggroLight.enabled = false;
     }
 	
-	// Update is called once per frame
+    // FixedUpdate
 	void FixedUpdate () {
 
         // Player in Radius
         if (target != null && !dead)
         {
-            // Look Direction
-            FaceTarget(target.transform.position);
-
-            // Activate Light
-            aggroLight.enabled = true;
-
             // Check if player is in sight
-            Physics.Raycast(this.transform.position, target.transform.position - transform.position, out hit, 10f, ignoreLayer);
+            Physics.Raycast(this.transform.position, target.transform.position - transform.position, out hit, 20f, ignoreLayer);
             if (hit.collider.gameObject.CompareTag("Player"))
             {
+                // Look Direction
+                FaceTarget(target.transform.position);
+
+                // Activate Light
+                aggroLight.enabled = true;
+
                 // Attack player
                 agent.SetDestination(target.transform.position);
             }
@@ -61,7 +62,7 @@ public class BatScript : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         // Player in radius
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !dead)
             target = other.gameObject;
     }
 
@@ -74,21 +75,22 @@ public class BatScript : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player") && !dead)
         {
             // Damage
             collision.gameObject.GetComponent<PlayerScript>().Health--;
 
             // Knockback
-            agent.isStopped = true;
-            Invoke("Attack", 1f);
+            if (agent != null && agent.isActiveAndEnabled && !dead)
+            {               
+                agent.isStopped = true;
+                Invoke("Attack", 1f);
+            }
         }
-
-        //if(dead && transform.position.y <= 0.5f)
-        //{
-        //    GetComponent<BoxCollider>().enabled = false;
-        //    rb.useGravity = false;
-        //}
+        else if(dead)
+        {
+            Disappear();
+        }
     }
 
     private void FaceTarget(Vector3 destination)
@@ -101,36 +103,42 @@ public class BatScript : MonoBehaviour {
 
     void Attack()
     {
-        if (target != null)
-            agent.SetDestination(target.transform.position);          
-        agent.isStopped = false;
+        if (!dead)
+        {
+            if (target != null)
+                agent.SetDestination(target.transform.position);
+            if (agent != null)
+                agent.isStopped = false;
+        }
     }
 
     public void Die()
     {
-        print("die");
-        agent.baseOffset = 0f;
-        agent.destination = transform.position;
-        target = null;
+        agent.enabled = false;
+
         rb.useGravity = true;
         anim.SetTrigger("death");
         dead = true;
         target = null;
     }
 
-    public void OnPlayerRespawn()
+    void Disappear()
     {
+        gameObject.SetActive(false);
+    }
+
+    public void OnPlayerRespawn() // Make sure to activate the gameObject first
+    {
+        // Respawn
+        transform.position = startPos;
+
+        agent.enabled = true;
+        agent.ResetPath();
+        agent.updatePosition = true;
         target = null;
-        
-        agent.baseOffset = 3.2f;
-        agent.destination = startPos;
 
         rb.useGravity = false;
         anim.SetTrigger("alive");
         dead = false;
-
-        GetComponent<BoxCollider>().enabled = true;
-
-        transform.position = startPos;
     }
 }

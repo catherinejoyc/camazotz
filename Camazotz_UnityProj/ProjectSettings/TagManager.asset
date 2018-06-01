@@ -10,6 +10,7 @@ TagManager:
   - Heart
   - Wall
   - Bat_Body
+  - Camazotz_Body
   layers:
   - Default
   - TransparentFX

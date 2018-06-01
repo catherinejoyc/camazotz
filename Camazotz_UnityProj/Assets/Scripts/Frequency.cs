@@ -14,7 +14,13 @@ public class Frequency : MonoBehaviour {
     {
         // Kill Bats
         if (other.CompareTag("Bat_Body") && other.gameObject.GetComponentInParent<BatScript>() != null)
+        {
             other.gameObject.GetComponentInParent<BatScript>().Die();
+        }
+
+        // Camazotz
+        if (other.CompareTag("Camazotz_Body"))
+            UIManager.MyInstance.UpdateStatus("It's not working! Run!");
     }
 
     private void Awake()
@@ -26,7 +32,7 @@ public class Frequency : MonoBehaviour {
 
     private void Update()
     {
-        //Frequency Attack
+        // Frequency Attack
         if (Input.GetButtonDown("Fire2") && cooldStart + 3f <= Time.time)
         {
             effect.Play();
@@ -38,7 +44,7 @@ public class Frequency : MonoBehaviour {
         else
             GetComponent<Collider>().enabled = false;
 
-        //Cooldown
+        // Cooldown
         UIManager.MyInstance.hfr_fill.fillAmount += Time.deltaTime / 3f;
     }
 
